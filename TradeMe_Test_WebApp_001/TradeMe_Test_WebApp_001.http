@@ -1,0 +1,6 @@
+@TradeMe_Test_WebApp_001_HostAddress = http://localhost:5247
+
+GET {{TradeMe_Test_WebApp_001_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
