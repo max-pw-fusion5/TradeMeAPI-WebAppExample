@@ -42,7 +42,7 @@ namespace TradeMe_Test_WebApp_001.Controllers
 
             //make the request to get the request tokens and store the result in responseText
             //responseText looks like this:
-            //oauth_token=F4B999BE86A4EA64CB82E7F6A1ED151E&oauth_token_secret=13791AEA7D1592067B2AA9F549DA82C8&oauth_callback_confirmed=true
+            //oauth_token=XXXXXXXX&oauth_token_secret=XXXXXXXXXX&oauth_callback_confirmed=true
             string responseText = "";
             try
             {
@@ -70,7 +70,7 @@ namespace TradeMe_Test_WebApp_001.Controllers
 
             //TODO: Generate (and send/redirect to/open browser with?) URL for user to log in and give permission to application 
 
-            string authorizeUrl = string.Format("https://secure.tmsandbox.co.nz/Oauth/Authorize?oauth_token={0}", OAuthHelper.getSecret("temp_RequestTokenKeyName"));
+            string authorizeUrl = string.Format("https://secure.tmsandbox.co.nz/Oauth/Authorize?oauth_token={0}", OAuthHelper.getSecret("RequestTokenKeyName"));
 
             return Redirect(authorizeUrl);
         }
