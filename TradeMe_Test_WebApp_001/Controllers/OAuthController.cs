@@ -65,8 +65,8 @@ namespace TradeMe_Test_WebApp_001.Controllers
 
             //TODO: store temporary token + token secret into azure keyvault
 
-            OAuthHelper.setSecret("temp_RequestTokenKeyName", matches.Groups[1].ToString());
-            OAuthHelper.setSecret("temp_RequestTokenSecretKeyName", matches.Groups[2].ToString());
+            OAuthHelper.setSecret("RequestTokenKeyName", matches.Groups[1].ToString());
+            OAuthHelper.setSecret("RequestTokenSecretKeyName", matches.Groups[2].ToString());
 
             //TODO: Generate (and send/redirect to/open browser with?) URL for user to log in and give permission to application 
 
@@ -95,9 +95,9 @@ namespace TradeMe_Test_WebApp_001.Controllers
             var authHeader = string.Format(
             "{0}{1}, oauth_verifier={2}, oauth_token={3}",
             OAuthHelper.GetBaseOAuthHeader(),
-            OAuthHelper.getSecret("temp_RequestTokenSecretKeyName"), 
+            OAuthHelper.getSecret("RequestTokenSecretKeyName"), 
             oauth_verifier, 
-            OAuthHelper.getSecret("temp_RequestTokenKeyName"));
+            OAuthHelper.getSecret("RequestTokenKeyName"));
 
             //make the last request to get our ACCESS tokens, these are permenant and can be used to authorize as the user on the API
             var responseText = HttpClientHelper.MakeHttpRequest( new Uri(url), authHeader, HttpMethod.Post);
@@ -105,8 +105,8 @@ namespace TradeMe_Test_WebApp_001.Controllers
             var matches = _oauthAccessTokenRegex.Match(responseText);
 
             //TODO: save access token and token secret
-            OAuthHelper.setSecret("temp_AccessTokenKeyName", matches.Groups[1].ToString());
-            OAuthHelper.setSecret("temp_AccessTokenSecretKeyName", matches.Groups[2].ToString());
+            OAuthHelper.setSecret("AccessTokenKeyName", matches.Groups[1].ToString());
+            OAuthHelper.setSecret("AccessTokenSecretKeyName", matches.Groups[2].ToString());
 
             return Ok("Access Tokens Acquired :D");
         }
