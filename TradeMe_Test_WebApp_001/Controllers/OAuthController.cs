@@ -84,9 +84,9 @@ namespace TradeMe_Test_WebApp_001.Controllers
         public IActionResult Callback(string oauth_token, string oauth_verifier)
         {
             //this just makes sure if we hit this url without the token, verifier or having a current request token we return an error
-            if (string.IsNullOrWhiteSpace(oauth_token) || string.IsNullOrWhiteSpace(oauth_verifier) || OAuthHelper.getSecret("temp_RequestTokenKeyName") == null || OAuthHelper.getSecret("temp_RequestTokenSecretKeyName") == null)
+            if (string.IsNullOrWhiteSpace(oauth_token) || string.IsNullOrWhiteSpace(oauth_verifier) || OAuthHelper.getSecret("RequestTokenKeyName") == null || OAuthHelper.getSecret("RequestTokenSecretKeyName") == null)
             {
-                // TODO: Error handling here
+                return BadRequest("ERROR: token or verifier error");
             }
             var url = string.Format("{0}AccessToken", TradeMeOAuthApiUrl);
 

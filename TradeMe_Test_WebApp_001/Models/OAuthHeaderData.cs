@@ -21,7 +21,7 @@ namespace TradeMe_Test_WebApp_001.Models
         public const string OAuthVersion = "1.0";
         public const string OAuthNonce = "7O3kEe";
         public const string SignatureMethod = "PLAINTEXT";
-        public static readonly string Callback = HttpUtility.UrlEncode("https://" + _httpContext.Request.Host + "/OAuth/Callback");
+        public static readonly string Callback = HttpUtility.UrlEncode("https://" + _httpContext.Request.Host + "/oauth/callback");
 
     }
 }
