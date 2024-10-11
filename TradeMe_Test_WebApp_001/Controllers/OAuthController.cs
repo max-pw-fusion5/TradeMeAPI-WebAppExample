@@ -16,16 +16,10 @@ namespace TradeMe_Test_WebApp_001.Controllers
         private readonly Regex _oauthRequestTokenRegex = new Regex("oauth_token=(\\w+)&oauth_token_secret=(\\w+)&oauth_callback_confirmed=(\\w+)");
         private readonly Regex _oauthAccessTokenRegex = new Regex("oauth_token=(\\w+)&oauth_token_secret=(\\w+)");
 
-        private const string RequestTokenKeyName = "RequestToken";
-        private const string RequestTokenSecretKeyName = "RequestTokenSecret";
-        private const string AccessTokenKeyName = "AccessToken";
-        private const string AccessTokenSecretKeyName = "AccessTokenSecret";
-
-        //[Route("/hello-world")]
-        //public string HelloWorld()
-        //{
-        //    return "Hello World!";
-        //}
+        private const string RequestTokenKeyName = "RequestTokenName";
+        private const string RequestTokenSecretKeyName = "RequestTokenSecretName";
+        private const string AccessTokenKeyName = "AccessTokenName";
+        private const string AccessTokenSecretKeyName = "AccessTokenSecretName";
 
         // GET: /OAuth/GetRequestToken
         //this is the first step. Before the page loads we make a request to TradeMe to get some request tokens, these are temporary.
@@ -65,12 +59,12 @@ namespace TradeMe_Test_WebApp_001.Controllers
 
             //TODO: store temporary token + token secret into azure keyvault
 
-            OAuthHelper.setSecret("RequestTokenKeyName", matches.Groups[1].ToString());
-            OAuthHelper.setSecret("RequestTokenSecretKeyName", matches.Groups[2].ToString());
+            OAuthHelper.setSecret(RequestTokenKeyName, matches.Groups[1].ToString());
+            OAuthHelper.setSecret(RequestTokenSecretKeyName, matches.Groups[2].ToString());
 
             //TODO: Generate (and send/redirect to/open browser with?) URL for user to log in and give permission to application 
 
-            string authorizeUrl = string.Format("https://secure.tmsandbox.co.nz/Oauth/Authorize?oauth_token={0}", OAuthHelper.getSecret("RequestTokenKeyName"));
+            string authorizeUrl = string.Format("https://secure.tmsandbox.co.nz/Oauth/Authorize?oauth_token={0}", OAuthHelper.getSecret(RequestTokenKeyName));
 
             return Redirect(authorizeUrl);
         }
@@ -84,7 +78,7 @@ namespace TradeMe_Test_WebApp_001.Controllers
         public IActionResult Callback(string oauth_token, string oauth_verifier)
         {
             //this just makes sure if we hit this url without the token, verifier or having a current request token we return an error
-            if (string.IsNullOrWhiteSpace(oauth_token) || string.IsNullOrWhiteSpace(oauth_verifier) || OAuthHelper.getSecret("RequestTokenKeyName") == null || OAuthHelper.getSecret("RequestTokenSecretKeyName") == null)
+            if (string.IsNullOrWhiteSpace(oauth_token) || string.IsNullOrWhiteSpace(oauth_verifier) || OAuthHelper.getSecret(RequestTokenKeyName) == null || OAuthHelper.getSecret(RequestTokenSecretKeyName) == null)
             {
                 return BadRequest("ERROR: token or verifier error");
             }
@@ -95,9 +89,9 @@ namespace TradeMe_Test_WebApp_001.Controllers
             var authHeader = string.Format(
             "{0}{1}, oauth_verifier={2}, oauth_token={3}",
             OAuthHelper.GetBaseOAuthHeader(),
-            OAuthHelper.getSecret("RequestTokenSecretKeyName"), 
+            OAuthHelper.getSecret(RequestTokenSecretKeyName), 
             oauth_verifier, 
-            OAuthHelper.getSecret("RequestTokenKeyName"));
+            OAuthHelper.getSecret(RequestTokenKeyName));
 
             //make the last request to get our ACCESS tokens, these are permenant and can be used to authorize as the user on the API
             var responseText = HttpClientHelper.MakeHttpRequest( new Uri(url), authHeader, HttpMethod.Post);
@@ -105,8 +99,8 @@ namespace TradeMe_Test_WebApp_001.Controllers
             var matches = _oauthAccessTokenRegex.Match(responseText);
 
             //TODO: save access token and token secret
-            OAuthHelper.setSecret("AccessTokenKeyName", matches.Groups[1].ToString());
-            OAuthHelper.setSecret("AccessTokenSecretKeyName", matches.Groups[2].ToString());
+            OAuthHelper.setSecret(AccessTokenKeyName, matches.Groups[1].ToString());
+            OAuthHelper.setSecret(AccessTokenSecretKeyName, matches.Groups[2].ToString());
 
             return Ok("Access Tokens Acquired :D");
         }
