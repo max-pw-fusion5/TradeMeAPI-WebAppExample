@@ -16,10 +16,10 @@ namespace TradeMe_Test_WebApp_001.Controllers
         private readonly Regex _oauthRequestTokenRegex = new Regex("oauth_token=(\\w+)&oauth_token_secret=(\\w+)&oauth_callback_confirmed=(\\w+)");
         private readonly Regex _oauthAccessTokenRegex = new Regex("oauth_token=(\\w+)&oauth_token_secret=(\\w+)");
 
-        private const string RequestTokenKeyName = "RequestTokenName";
-        private const string RequestTokenSecretKeyName = "RequestTokenSecretName";
-        private const string AccessTokenKeyName = "AccessTokenName";
-        private const string AccessTokenSecretKeyName = "AccessTokenSecretName";
+        private const string RequestTokenKeyName = "RequestToken";
+        private const string RequestTokenSecretKeyName = "RequestTokenSecret";
+        private const string AccessTokenKeyName = "AccessToken";
+        private const string AccessTokenSecretKeyName = "AccessTokenSecret";
 
         // GET: /OAuth/GetRequestToken
         //this is the first step. Before the page loads we make a request to TradeMe to get some request tokens, these are temporary.
