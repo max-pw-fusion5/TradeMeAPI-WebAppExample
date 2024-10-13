@@ -14,7 +14,7 @@ namespace TradeMe_Test_WebApp_001.Controllers
         [HttpGet]
         public IActionResult GetRequestToken()
         {
-            var authHeader = string.Format("{0}{1}, oauth_token={2}", OAuthHelper.GetBaseOAuthHeader(), OAuthHelper.getSecret("AccessTokenSecretKeyName"), OAuthHelper.getSecret("AccessTokenKeyName"));
+            var authHeader = string.Format("{0}{1}, oauth_token={2}", OAuthHelper.GetBaseOAuthHeader(), OAuthHelper.getSecret(OAuthHelper.AccessTokenSecretKeyName), OAuthHelper.getSecret(OAuthHelper.AccessTokenKeyName));
             var response = HttpClientHelper.MakeHttpRequest(new Uri(MyTradeMeSummaryUrl), authHeader, HttpMethod.Get);
 
             return Ok(response);

@@ -20,6 +20,11 @@ namespace TradeMe_Test_WebApp_001.Helpers
         private static string temp_AccessTokenKeyName = string.Empty;
         private static string temp_AccessTokenSecretKeyName = string.Empty;
 
+        public static readonly string RequestTokenKeyName = "RequestToken";
+        public static readonly string RequestTokenSecretKeyName = "RequestTokenSecret";
+        public static readonly string AccessTokenKeyName = "AccessToken";
+        public static readonly string AccessTokenSecretKeyName = "AccessTokenSecret";
+
         private static SecretClientOptions options = new SecretClientOptions()
         {
             Retry =
