@@ -12,18 +12,27 @@ namespace TradeMe_Test_WebApp_001.Helpers
     public static class OAuthHelper
     {
 
-        //TODO: delete these variables and implement
-        //Azure Key Vault secret fetching
+        //In memory secrets storage 
+        //FOR USE IN LOCAL TESTING DEPLOYMENT ONLY
         private static string temp_RequestTokenKeyName = string.Empty;
         private static string temp_RequestTokenSecretKeyName = string.Empty;
 
         private static string temp_AccessTokenKeyName = string.Empty;
         private static string temp_AccessTokenSecretKeyName = string.Empty;
 
+        //For Azure Deployment 
+
         public static readonly string RequestTokenKeyName = "RequestToken";
         public static readonly string RequestTokenSecretKeyName = "RequestTokenSecret";
         public static readonly string AccessTokenKeyName = "AccessToken";
         public static readonly string AccessTokenSecretKeyName = "AccessTokenSecret";
+
+        //For Local Deployment
+
+        // public static readonly string RequestTokenKeyName = "temp_RequestTokenKeyName";
+        // public static readonly string RequestTokenSecretKeyName = "temp_RequestTokenSecretKeyName";
+        // public static readonly string AccessTokenKeyName = "temp_AccessTokenKeyName";
+        // public static readonly string AccessTokenSecretKeyName = "temp_AccessTokenSecretKeyName";
 
         private static SecretClientOptions options = new SecretClientOptions()
         {

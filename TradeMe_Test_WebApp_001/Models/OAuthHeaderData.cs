@@ -15,8 +15,8 @@ namespace TradeMe_Test_WebApp_001.Models
         //Secrets should be fetched from a secure source, such as an Azure Key Vault
         //create your own application here https://www.tmsandbox.co.nz/MyTradeMe/Api/RegisterNewApplication.aspx
         //your consumer key and secret should then be filled out in the vars below (but not by hand, set them from somewhere else in the application, or don't store them here at all) 
-        public static string ConsumerKey { get; set; } = "FB43299EE5102F54F0D690E736675ABD";
-        public static string ConsumerSecret { get; set; } = "B50DC6341FA7A7F2011CEB5A6B09489F";
+        public static string ConsumerKey { get; set; } = "";
+        public static string ConsumerSecret { get; set; } = "";
         //this callback must have the same domain as the one you registered with us when you created your application
         public const string OAuthVersion = "1.0";
         public const string OAuthNonce = "7O3kEe";
