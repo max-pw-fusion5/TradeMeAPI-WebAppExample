@@ -3,15 +3,15 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "KeyVault_name": {
-            "defaultValue": "TMCreds-maxpw425",
+            "defaultValue": "TradeMe-Secrets",
             "type": "String"
         },
         "WebApp_name": {
-            "defaultValue": "Test-WebApp-trademe-maxpw425",
+            "defaultValue": "Test-WebApp-TradeMe",
             "type": "String"
         },
         "ServicePlan_name": {
-            "defaultValue": "Test_WebApp_ServicePlan",
+            "defaultValue": "Test_WebApp_Trademe_ServicePlan",
             "type": "String"
         }
     },
@@ -101,7 +101,7 @@
                 "enableSoftDelete": true,
                 "softDeleteRetentionInDays": 90,
                 "enableRbacAuthorization": false,
-                "vaultUri": "https://tmcreds-maxpw425.vault.azure.net/",
+                "vaultUri": "https://[toLOwer(parameters('KeyVault_name'))].vault.azure.net/",
                 "provisioningState": "Succeeded",
                 "publicNetworkAccess": "Enabled"
             }
@@ -180,12 +180,12 @@
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "test-webapp-trademe-maxpw425.azurewebsites.net",
+                        "name": "[toLower(parameters('WebApp_name')].azurewebsites.net",
                         "sslState": "Disabled",
                         "hostType": "Standard"
                     },
                     {
-                        "name": "test-webapp-trademe-maxpw425.scm.azurewebsites.net",
+                        "name": "[toLower(parameters('WebApp_name')].scm.azurewebsites.net",
                         "sslState": "Disabled",
                         "hostType": "Repository"
                     }
@@ -275,7 +275,7 @@
                 "acrUseManagedIdentityCreds": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "$Test-WebApp-trademe-maxpw425",
+                "publishingUsername": "$[parameters('WebApp_name')]",
                 "scmType": "LocalGit",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
@@ -336,7 +336,7 @@
                 "[resourceId('Microsoft.Web/sites', parameters('WebApp_name'))]"
             ],
             "properties": {
-                "siteName": "Test-WebApp-trademe-maxpw425",
+                "siteName": "[parameters('WebApp_name')]",
                 "hostNameType": "Verified"
             }
         }
