@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "b9b886af-8e0b-46da-8c2c-4464c03d4132",
+		"name": "TradeMeWebApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37560194"
+	},
+	"item": [
+		{
+			"name": "Local Deployment",
+			"item": [
+				{
+					"name": "Hello World",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{localhost}}/hello-world",
+							"protocol": "http",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"hello-world"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Trade Me Summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{localhost}}/trade-me/summary",
+							"protocol": "http",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"trade-me",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hello World",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{host}}/hello-world",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"hello-world"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "My Trade Me Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{host}}/trade-me/summary",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"trade-me",
+						"summary"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
