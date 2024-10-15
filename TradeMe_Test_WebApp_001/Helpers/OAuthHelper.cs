@@ -22,17 +22,17 @@ namespace TradeMe_Test_WebApp_001.Helpers
 
         //For Azure Deployment 
 
-        public static readonly string RequestTokenKeyName = "RequestToken";
-        public static readonly string RequestTokenSecretKeyName = "RequestTokenSecret";
-        public static readonly string AccessTokenKeyName = "AccessToken";
-        public static readonly string AccessTokenSecretKeyName = "AccessTokenSecret";
+        //public static readonly string RequestTokenKeyName = "RequestToken";
+        //public static readonly string RequestTokenSecretKeyName = "RequestTokenSecret";
+        //public static readonly string AccessTokenKeyName = "AccessToken";
+        //public static readonly string AccessTokenSecretKeyName = "AccessTokenSecret";
 
         //For Local Deployment
 
-        // public static readonly string RequestTokenKeyName = "temp_RequestTokenKeyName";
-        // public static readonly string RequestTokenSecretKeyName = "temp_RequestTokenSecretKeyName";
-        // public static readonly string AccessTokenKeyName = "temp_AccessTokenKeyName";
-        // public static readonly string AccessTokenSecretKeyName = "temp_AccessTokenSecretKeyName";
+        public static readonly string RequestTokenKeyName = "temp_RequestTokenKeyName";
+        public static readonly string RequestTokenSecretKeyName = "temp_RequestTokenSecretKeyName";
+        public static readonly string AccessTokenKeyName = "temp_AccessTokenKeyName";
+        public static readonly string AccessTokenSecretKeyName = "temp_AccessTokenSecretKeyName";
 
         private static SecretClientOptions options = new SecretClientOptions()
         {
@@ -60,6 +60,16 @@ namespace TradeMe_Test_WebApp_001.Helpers
             return string.Format(
                 "OAuth oauth_callback={0}, oauth_consumer_key={1}, oauth_version={2}, oauth_timestamp={3}, oauth_nonce={4}, oauth_signature_method={5}, oauth_signature={6}",
                 OAuthHeaderData.Callback, OAuthHelper.getSecret("ConsumerKey"), OAuthHeaderData.OAuthVersion, GetOauthTimestamp(), OAuthHeaderData.OAuthNonce, OAuthHeaderData.SignatureMethod, signature);
+        }
+
+        public static string GetTokenedOAuthHeader()
+        {
+            if( string.IsNullOrWhiteSpace(OAuthHelper.getSecret(OAuthHelper.AccessTokenSecretKeyName)) || string.IsNullOrWhiteSpace(OAuthHelper.getSecret(OAuthHelper.AccessTokenKeyName)))
+            {
+                return "-1";
+            }
+
+            return string.Format("{0}{1}, oauth_token={2}", OAuthHelper.GetBaseOAuthHeader(), OAuthHelper.getSecret(OAuthHelper.AccessTokenSecretKeyName), OAuthHelper.getSecret(OAuthHelper.AccessTokenKeyName));
         }
 
         public static bool setSecret(string secretName, string secretValue)
